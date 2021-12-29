@@ -2,7 +2,7 @@ version: '3.8'
 services:
   es-node1:
     container_name: es-node1
-    image: amazon/opendistro-for-elasticsearch:1.13.2
+    image: amazon/opendistro-for-elasticsearch:1.13.3
     deploy:
       resources:
         limits:
@@ -22,9 +22,8 @@ services:
         soft: 65536 # maximum number of open files for the Elasticsearch user, set to at least 65536 on modern systems
         hard: 65536
     volumes:
-      - /opt/data/elasticsearch1:/usr/share/elasticsearch/data
+      - es-data1:/usr/share/elasticsearch/data
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-
       - ./certs/root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
       - ./certs/node1.pem:/usr/share/elasticsearch/config/esnode.pem
       - ./certs/node1.key:/usr/share/elasticsearch/config/esnode.key
@@ -33,7 +32,7 @@ services:
     restart: on-failure
   es-node2:
     container_name: es-node2
-    image: amazon/opendistro-for-elasticsearch:1.13.2
+    image: amazon/opendistro-for-elasticsearch:1.13.3
     deploy:
       resources:
         limits:
@@ -51,9 +50,8 @@ services:
         soft: 65536
         hard: 65536
     volumes:
-      - /opt/data/elasticsearch2:/usr/share/elasticsearch/data
+      - es-data2:/usr/share/elasticsearch/data
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-
       - ./certs/root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
       - ./certs/node2.pem:/usr/share/elasticsearch/config/esnode.pem
       - ./certs/node2.key:/usr/share/elasticsearch/config/esnode.key
@@ -62,7 +60,7 @@ services:
     restart: on-failure
   es-node3:
     container_name: es-node3
-    image: amazon/opendistro-for-elasticsearch:1.13.2
+    image: amazon/opendistro-for-elasticsearch:1.13.3
     deploy:
       resources:
         limits:
@@ -82,9 +80,8 @@ services:
         soft: 65536
         hard: 65536
     volumes:
-      - /opt/data/elasticsearch3:/usr/share/elasticsearch/data
+      - es-data3:/usr/share/elasticsearch/data
       - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-
       - ./certs/root-ca.pem:/usr/share/elasticsearch/config/root-ca.pem
       - ./certs/node3.pem:/usr/share/elasticsearch/config/esnode.pem
       - ./certs/node3.key:/usr/share/elasticsearch/config/esnode.key
@@ -92,7 +89,7 @@ services:
       - elastic
     restart: on-failure
   kibana:
-    image: amazon/opendistro-for-elasticsearch-kibana:1.13.2
+    image: amazon/opendistro-for-elasticsearch-kibana:latest
     container_name: odfe-kibana
     ports:
       - 5601:5601
@@ -110,10 +107,10 @@ services:
       - ./certs/node1.key:/usr/share/elasticsearch/config/node-key.pem
     #volumes:
       #- ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
-#volumes:
-  #es-data1:
-  #es-data2:
-  #es-data3:
+volumes:
+  es-data1:
+  es-data2:
+  es-data3:
 
 networks:
   elastic:
