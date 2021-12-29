@@ -20,8 +20,8 @@ To access Open Distro:
 
 In your web browser:
 
-Visit: `https://localhost:5601`
+Visit: ``https://localhost:5601``
 
-username: `admin`
+username: ``admin``
 
-password" `admin`
+password" ``admin``
