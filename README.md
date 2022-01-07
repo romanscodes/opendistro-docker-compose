@@ -24,4 +24,4 @@ Visit: ``https://localhost:5601``
 
 username: ``admin``
 
-password" ``admin``
+password: ``admin``
